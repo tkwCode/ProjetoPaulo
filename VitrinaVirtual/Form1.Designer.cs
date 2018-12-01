@@ -32,23 +32,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panImagem = new System.Windows.Forms.Panel();
             this.pctBImagem = new System.Windows.Forms.PictureBox();
-            this.panDivers = new System.Windows.Forms.Panel();
-            this.rctbComunicado = new System.Windows.Forms.RichTextBox();
-            this.panTitleDivers = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.panView = new System.Windows.Forms.Panel();
             this.wbBDocumento = new System.Windows.Forms.WebBrowser();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblLetreira = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblHora = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timLetreira = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.sliderArquivos = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panImagem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctBImagem)).BeginInit();
-            this.panDivers.SuspendLayout();
-            this.panTitleDivers.SuspendLayout();
             this.panView.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -58,7 +54,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.panImagem);
-            this.panel1.Controls.Add(this.panDivers);
             this.panel1.Controls.Add(this.panView);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
@@ -74,7 +69,7 @@
             this.panImagem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panImagem.Location = new System.Drawing.Point(655, 42);
             this.panImagem.Name = "panImagem";
-            this.panImagem.Size = new System.Drawing.Size(265, 190);
+            this.panImagem.Size = new System.Drawing.Size(265, 406);
             this.panImagem.TabIndex = 4;
             // 
             // pctBImagem
@@ -82,49 +77,10 @@
             this.pctBImagem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pctBImagem.Location = new System.Drawing.Point(0, 0);
             this.pctBImagem.Name = "pctBImagem";
-            this.pctBImagem.Size = new System.Drawing.Size(265, 190);
+            this.pctBImagem.Size = new System.Drawing.Size(265, 406);
             this.pctBImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pctBImagem.TabIndex = 0;
             this.pctBImagem.TabStop = false;
-            // 
-            // panDivers
-            // 
-            this.panDivers.Controls.Add(this.rctbComunicado);
-            this.panDivers.Controls.Add(this.panTitleDivers);
-            this.panDivers.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panDivers.Location = new System.Drawing.Point(655, 232);
-            this.panDivers.Name = "panDivers";
-            this.panDivers.Size = new System.Drawing.Size(265, 216);
-            this.panDivers.TabIndex = 3;
-            // 
-            // rctbComunicado
-            // 
-            this.rctbComunicado.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rctbComunicado.Location = new System.Drawing.Point(0, 33);
-            this.rctbComunicado.Name = "rctbComunicado";
-            this.rctbComunicado.Size = new System.Drawing.Size(265, 183);
-            this.rctbComunicado.TabIndex = 1;
-            this.rctbComunicado.Text = "";
-            // 
-            // panTitleDivers
-            // 
-            this.panTitleDivers.Controls.Add(this.label3);
-            this.panTitleDivers.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panTitleDivers.Location = new System.Drawing.Point(0, 0);
-            this.panTitleDivers.Name = "panTitleDivers";
-            this.panTitleDivers.Size = new System.Drawing.Size(265, 33);
-            this.panTitleDivers.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Cooper Black", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(265, 33);
-            this.label3.TabIndex = 0;
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panView
             // 
@@ -169,6 +125,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblHora);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -176,22 +133,47 @@
             this.panel2.Size = new System.Drawing.Size(920, 42);
             this.panel2.TabIndex = 0;
             // 
+            // lblHora
+            // 
+            this.lblHora.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHora.ForeColor = System.Drawing.Color.Navy;
+            this.lblHora.Location = new System.Drawing.Point(655, 0);
+            this.lblHora.Name = "lblHora";
+            this.lblHora.Size = new System.Drawing.Size(265, 42);
+            this.lblHora.TabIndex = 0;
+            this.lblHora.Text = "label2";
+            this.lblHora.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label1
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
             this.label1.Font = new System.Drawing.Font("Cooper Black", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(920, 42);
+            this.label1.Size = new System.Drawing.Size(655, 42);
             this.label1.TabIndex = 0;
-            this.label1.Text = "INSTITUTO MEDIO POLITECNICO DE CAMBAMBE - DONDO";
+            this.label1.Text = "VITRINA VIRTUAL IMPC - DONDO";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timLetreira
             // 
-            this.timLetreira.Interval = 500;
+            this.timLetreira.Enabled = true;
+            this.timLetreira.Interval = 200;
             this.timLetreira.Tick += new System.EventHandler(this.timLetreira_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // sliderArquivos
+            // 
+            this.sliderArquivos.Enabled = true;
+            this.sliderArquivos.Interval = 10000;
+            this.sliderArquivos.Tick += new System.EventHandler(this.sliderArquivos_Tick);
             // 
             // Form1
             // 
@@ -204,12 +186,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vitrina Informativa Virtual";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panImagem.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctBImagem)).EndInit();
-            this.panDivers.ResumeLayout(false);
-            this.panTitleDivers.ResumeLayout(false);
             this.panView.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -222,10 +203,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panImagem;
         private System.Windows.Forms.PictureBox pctBImagem;
-        private System.Windows.Forms.Panel panDivers;
-        private System.Windows.Forms.RichTextBox rctbComunicado;
-        private System.Windows.Forms.Panel panTitleDivers;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panView;
         private System.Windows.Forms.WebBrowser wbBDocumento;
         private System.Windows.Forms.Panel panel3;
@@ -234,6 +211,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timLetreira;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label lblHora;
+        private System.Windows.Forms.Timer sliderArquivos;
     }
 }
 

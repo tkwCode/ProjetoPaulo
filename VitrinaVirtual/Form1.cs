@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Word;
 
@@ -19,14 +13,15 @@ namespace VitrinaVirtual
         string tempFileName = null;
         private int CurrentPosition { get; set; }
         List<string> defaultNew = new List<string>();
+        ArquivoBLL arquivoBLL;
+        System.Data.DataTable tabelaArquivos;
 
         public Form1()
         {
             InitializeComponent();
-            
+            arquivoBLL = new ArquivoBLL();
             //lblLetreira.UseCompatibleTextRendering = true;
-            lblLetreira.Text = "Durante 4 anos de formação, mostramos o que nossos querridos professores nos ensinaram.";
-            pctBImagem.Image = Properties.Resources.IMG_20181012_084119;
+            lblLetreira.Text = "                        Durante 4 anos de formação, mostramos o que nossos querridos professores nos ensinaram.";
         }
 
 
@@ -59,15 +54,7 @@ namespace VitrinaVirtual
 
         private void timLetreira_Tick(object sender, EventArgs e)
         {
-
-            //CarregarFicheiroDefault();
-            //if (CurrentPosition > Width)
-            //    CurrentPosition = -Width;
-            //else
-            //    CurrentPosition += 2;
-
-            //Invalidate();
-
+            Animacao.Efeitos.Letreiro(lblLetreira);
         }
 
         private void lblLetreira_Paint(object sender, PaintEventArgs e)
@@ -80,7 +67,7 @@ namespace VitrinaVirtual
             if (tempFileName != string.Empty)
             {
                 // delete the temp file we created. 
-                File.Delete(tempFileName);
+                //File.Delete(tempFileName);
 
                 // set the tempFileName to an empty string. 
                 tempFileName = string.Empty;
@@ -102,12 +89,12 @@ namespace VitrinaVirtual
             object oldFileName = (object)fileName;
             object readOnly = false;
             Microsoft.Office.Interop.Word.Application ac = null;
-
+            
             try
             {
                 // First, create a new Microsoft.Office.Interop.Word.ApplicationClass.
                 ac = new Microsoft.Office.Interop.Word.Application();
-
+                
                 // Now we open the document.
                 Document doc = ac.Documents.Open(ref oldFileName, ref m, ref readOnly,
                     ref m, ref m, ref m, ref m, ref m, ref m, ref m,
@@ -132,8 +119,7 @@ namespace VitrinaVirtual
             finally
             {
                 // Make sure we close the application class. 
-                if (ac != null)
-                    ac.Quit(ref readOnly, ref m, ref m);
+                ac.Quit(ref readOnly, ref m, ref m);
             }
         }
 
@@ -154,8 +140,60 @@ namespace VitrinaVirtual
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadDocument(System.Windows.Forms.Application.StartupPath + @"\Capa.docx");
-            //CarregarFicheiroDefault();
+            AjustarLocalizacaoUI();
+            PegarArquivosAVisualizar();
+            //LoadDocument(System.Windows.Forms.Application.StartupPath + @"\CAPA DO PROJECTO.docx");
+            ApresentarDocumentos();
+        }
+
+        private void PegarArquivosAVisualizar()
+        {
+            List<SqlParametros> list = new List<SqlParametros>() { new SqlParametros { Parametro = "@Hoje", Valor = DateTime.Now.Date } };
+            tabelaArquivos = arquivoBLL.PegarArquivosAVisualizar(list);
+        }
+
+        int paginas = 0;
+
+        private void ApresentarDocumentos()
+        {
+            int row = tabelaArquivos.Rows.Count;
+            string pathImage;
+
+            if (paginas < row)
+            {
+                wbBDocumento.Url = null;
+                LoadDocument(tabelaArquivos.Rows[paginas][1].ToString());
+                pathImage = tabelaArquivos.Rows[paginas][2].ToString();
+                if (pathImage != "")
+                    pctBImagem.Image = System.Drawing.Image.FromFile(pathImage);
+                else
+                    pctBImagem.Image = null;
+                paginas++;
+            }
+            else
+                paginas = 0;
+        }
+
+        private void AjustarLocalizacaoUI()
+        {
+            
+            panView.Location = new System.Drawing.Point((this.Width - (panImagem.Width - 100)),(this.Height - (panel2.Height + panel3.Height)));
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            lblHora.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                System.Windows.Forms.Application.Exit();
+        }
+
+        private void sliderArquivos_Tick(object sender, EventArgs e)
+        {
+            ApresentarDocumentos();
         }
     }
 }
